@@ -1,4 +1,4 @@
-Question: https://leetcode.com/problems/design-hashmap/
+// Question: https://leetcode.com/problems/design-hashmap/
 
 class MyHashMap {
     
@@ -66,5 +66,5 @@ class MyHashMap {
  * obj.remove(key);
  */
  
-TimeComplexity: O(1) for average and O(n) for all put,get and remove operations
-SpaceComplexity: O(n) where 'n' is the number of entries in HashMap
+// TimeComplexity: O(1) for average and O(n) for all put,get and remove operations
+// SpaceComplexity: O(n) where 'n' is the number of entries in HashMap
