@@ -1,0 +1,70 @@
+Question: https://leetcode.com/problems/design-hashmap/
+
+class MyHashMap {
+    
+    // initilaze an arrray of linkedlists of size 1000
+    ListNode[] map = new ListNode[1000];
+    
+    public MyHashMap() {
+    }
+    
+    public void put(int key, int value) {
+        int index = getIndex(key); // function to getIndex of key
+        ListNode prev  = findNode(index,key); // find the prev node with the given key
+        if(prev.next != null) { // if the node already exists update it
+            prev.next.value = value;
+        } else { // else add a new node with key and value
+            prev.next = new ListNode(key,value);
+        }
+    }
+    
+    public int get(int key) {
+        int index = getIndex(key);
+        ListNode prev  = findNode(index,key);
+        return prev.next == null ? -1 : prev.next.value; // if exists return value or else return -1
+    }
+    
+    public void remove(int key) {
+        int index = getIndex(key);
+        ListNode prev  = findNode(index,key);
+        if(prev.next != null) { // if the node exists with the given key
+            prev.next = prev.next.next; // skip the node
+        }
+        
+    }
+    private static class ListNode { //class for ListNode
+        int key, value;
+        ListNode next;
+        ListNode(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+        
+    }
+    
+    private int getIndex(int index) { // get the hashCode Index for the given key
+        return Integer.hashCode(index) % map.length;
+    }
+    
+    private ListNode findNode(int index, int key) { // find the node at hashcode Index with the given key
+        if(map[index] == null) { //if no node exists at the hashCode Index
+            return map[index] = new ListNode(-1,-1); // create a new Node with [-1,-1] and start the index with [-1,-1];
+        }
+        ListNode prev = map[index]; // this starts with [-1,-1]
+        while(prev.next != null && prev.next.key != key) { //stops before the node with given key or at last
+            prev = prev.next;
+        }
+        return prev;
+    }
+}
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */
+ 
+TimeComplexity: O(1) for average and O(n) for all put,get and remove operations
+SpaceComplexity: O(n) where 'n' is the number of entries in HashMap
