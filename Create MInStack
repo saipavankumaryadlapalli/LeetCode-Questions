@@ -1,0 +1,41 @@
+https://leetcode.com/problems/min-stack/
+
+class MinStack {
+    
+    ListNode head;
+        
+    public void push(int val) {
+        if(head == null) { // if the linkedList is empty
+            head = new ListNode(val,val,head);
+        } else {
+            head = new ListNode(val, Math.min(val,head.min),head); // create a new Node and it before the current head Node and point head Node to new one
+        }
+    }
+    
+    public void pop() {
+        head = head.next; // unlink the head node
+    }
+    
+    public int top() {
+        return head.value; // return the headNode value
+        
+    }
+    
+    public int getMin() {
+        return head.min; // return min value till headNode
+    }
+    
+    private static class ListNode {
+        int value;
+        int min;
+        ListNode next;
+        ListNode(int value,int min, ListNode head) {
+            this.value = value;
+            this.min = min;
+            this.next = head;
+        }
+    }
+}
+
+Time Complexity: O(1);
+Space Compexity: O(1);
