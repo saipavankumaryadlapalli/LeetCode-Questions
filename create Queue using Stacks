@@ -1,0 +1,48 @@
+https://leetcode.com/problems/implement-queue-using-stacks/
+
+class MyQueue {
+    
+    Stack<Integer> s1 = new Stack<Integer>(); // create 2 stacks
+    Stack<Integer> s2 = new Stack<Integer>();
+    int first;
+    
+    public MyQueue() {
+        
+    }
+    
+    // push will consider only s1 and pop and peek check s2 first and check s1 if s2 is empty
+    
+    public void push(int x) { // just push the elements into stack s1 and note the first element
+        if(s1.isEmpty()) {
+            first = x;
+        }
+        s1.push(x);
+    }
+    
+    public int pop() {
+        if(!s2.isEmpty()) return s2.pop(); // if s2 has elements directly pop the top element
+        while(!s1.isEmpty()) { // else reverse s1 to s2 and pop top one
+            s2.push(s1.pop());
+        }
+        return s2.pop();
+    }
+    
+    public int peek() {
+        if(s2.isEmpty()) return first; //if s2 is empty instead of reversing entire stack return the noted element
+        return s2.peek();
+    }
+    
+    public boolean empty() {
+        return s1.isEmpty() && s2.isEmpty(); // check 2 stacks
+    }
+    
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
