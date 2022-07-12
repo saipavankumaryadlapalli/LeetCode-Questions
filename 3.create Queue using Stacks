@@ -38,6 +38,10 @@ class MyQueue {
     
 }
 
+Time Complexity:O(1) on average ; O(1) for push,peek and empty. O(n) for pop in few cases;
+Space Complexity: O(n);
+
+
 /**
  * Your MyQueue object will be instantiated and called as such:
  * MyQueue obj = new MyQueue();
