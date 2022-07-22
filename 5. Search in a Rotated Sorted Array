@@ -1,34 +1,37 @@
-https://leetcode.com/problems/search-in-rotated-sorted-array
+// https://leetcode.com/problems/search-in-rotated-sorted-array
 
 class Solution {
     public int search(int[] nums, int target) {
         int low =0, high = nums.length -1;
-        if(nums[0] == target) {
+        if(nums[0] == target) { // if singleton verify and return
             return low;
         } else return binarySearch(low,high,target,nums);
     }
     
     private int binarySearch(int low,int high,int target,int[] nums) {
-        if(low < high) {
+        if(low < high) { // condition to break recursion
            if(nums[low] == target) {
                return low;
            } else if(nums[high] == target) {
                 return high;
             }
         } else return -1;
-        int mid = (low + high)/2;
-        if(nums[mid] >= nums[low]){
-            if(target <= nums[mid] && target >= nums[low]) {
+        int mid = (low + high)/2; 
+        if(nums[mid] >= nums[low]){ //conveys array is not disturbed before mid
+            if(target <= nums[mid] && target >= nums[low]) { //check if the target is in range of undisturbed part
                 high = mid;
             } else {
                 low = mid+1;
             }
         }                  
-        else if (nums[mid] < nums[low]) {
-            if(target > nums[mid] && target < nums[high]) {
+        else if (nums[mid] < nums[low]) { //conveys array is not disturbed after mid
+            if(target > nums[mid] && target < nums[high]) { //check if the target is in range of undisturbed part
                 low = mid+1;
             } else high = mid;
         }
         return binarySearch(low,high,target,nums);
     }
 }
+
+// TimeComplexity: O(logn);
+// SpaceComplexity: O(n)
