@@ -1,0 +1,29 @@
+https://leetcode.com/problems/longest-palindromic-substring/
+
+class Solution {
+    public String longestPalindrome(String s) {
+        String longestStr = "";
+        for(int i=0; i<s.length(); i++) {
+            String s1 = checkAround(s,i,i);
+            String s2 = checkAround(s,i,i+1);
+            if(longestStr.length() <= s1.length()) {
+                longestStr = s1;
+            }
+            if(longestStr.length() <= s2.length()) {
+                longestStr = s2;
+            }
+        }
+        return longestStr;
+    }
+    
+    private String checkAround(String s, int left, int right) { // function thet checks the given term is palindrome or not
+        while((left>=0 && right < s.length()) &&  s.charAt(left) == s.charAt(right)) {
+            left --;
+            right ++;
+        }
+        return s.substring(left+1,right);
+    }
+}
+
+TimeComplexity: O(n);
+SpaceComplexity: O(1);
